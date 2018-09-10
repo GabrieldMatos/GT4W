@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Cadastro</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="./assets/materialize/css/materialize.min.css" media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./assets/css/cadastro.css" />
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+  <script type="text/javascript" src="./assets/materialize/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../View/assets/js/cadastro.js"> </script>
+</head>
+<body>
+
+
+
+  
+  <section id="cadastro" class="slide row">
+    <h3 class="center-align">Processo Seletivo - GT4W</h3>
+    <div class="container margin-top2">
+      <div class="row teste">
+        <!-- formulário de cadastro -->
+        <form method="post" class="col s12">
+
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input required id="nome" name="nome" type="text"/>
+              <label for="nome">Nome*</label>
+            </div>
+
+            <div class="input-field col s6 m3">
+                <input required onblur="TestaCPF(this.value)" id="cpf" class="" name="cpf" type="text" placeholder="000.000.000-00" minlength="11"/>
+                <label data-error="CPF já utilizado!" for="cpf">CPF*</label>
+              </div>
+
+            <div class="input-field col s6 m3">
+              <input id="nascimento" name="nascimento" type="text" class="datepicker" placeholder="dd/mm/yyyy"/>
+              <label for="nascimento">Nascimento</label>
+            </div>
+
+          </div>
+          <div class="row">
+          <div class="col s6 m6">
+            <label for="selectUF">Estado</label>
+            <select class="materialSelect" id="selectUF" name="selectUF">
+              <option selected>Escolha seu estado</option>
+            </select>
+          </div>
+            
+            <div class="input-field col s6 m6">
+              <input id="peso" onkeypress="return SomenteNumero(event);" name="peso" type="text"/>
+              <label for="peso">peso</label>
+            </div>
+          </div>
+            <div class="input-field center-align">
+            <button type="submit" id="cadastrar" name="cadastrar" class="waves-effect waves-light margin-bot btn">Cadastrar</button>
+          </div>
+        </form>
+
+        <!-- formulário mostrando todos os registros -->
+          <table class="highlight">
+              <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nascimento</th>
+                    <th>CPF</th>
+                    <th>Peso</th>
+                    <th>Estado</th>
+                </tr>
+              </thead>
+      
+              <tbody id="tabela">
+              </tbody>
+            </table>    
+      </div>
+    </div>
+
+   <div id="modal1" class="modal ">
+     <div class="modal-content">
+       <h4>Editar</h4>
+       <!-- formulário de edição -->
+       <form id="form-edita-registro">
+          <input type="hidden" id="idInscrito" name="idInscrito" value="">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputNomeEdit">Nome*</label>
+              <input type="text" class="form-control" id="inputNomeEdit" name="inputNomeEdit" placeholder="Nome">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCpfEdit">CPF*</label>
+              <input disabled type="text" class="form-control" id="inputCpfEdit" name="inputCpfEdit" placeholder="CPF">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputDataNascEdit">Data Nascimento</label>
+              <input type="text" class="datepicker" class="form-control" id="inputDataNascEdit" name="inputDataNascEdit">
+            </div>
+            
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPesoEdit">Peso - kg</label>
+              <input type="text" class="form-control" onkeypress="return SomenteNumero(event);" id="inputPesoEdit" name="inputPesoEdit" placeholder="Peso em kilograma">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="selectUFEdit">Estado</label>
+              <select class="materialSelect" id="selectUFEdit" name="selectUFEdit" class="form-control">
+                <option selected>Escolha Seu Estado</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <a class="modal-close waves-effect waves-red btn-flat" >Cancelar</a>
+            <button type="submit" class="waves-effect waves-green btn-flat">Editar</button>
+          </div>
+        </form>
+     </div>
+   </div>
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>DELETAR</h4>
+      <p>Tem certeza que deseja excluir esse registro?</p>
+    </div>
+    <div class="modal-footer">
+      <!-- formulário de deletar -->
+        <form id="form-deleta-registro">
+        <input type="hidden" id="idInscrito" name="idInscrito" value="">
+        <a class="modal-close waves-effect waves-green btn-flat" >Não</a>
+        <button type="submit" class="waves-effect waves-red btn-flat">Sim</button>
+        </form>
+    </div>
+  </div>
+  </section>
+</body>
+</html>
